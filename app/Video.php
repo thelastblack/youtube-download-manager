@@ -15,7 +15,7 @@ class Video extends Model
 
     public function getDownloadLinkAttribute()
     {
-      return 'public'.DIRECTORY_SEPARATOR.static::UPLOAD_PATH.DIRECTORY_SEPARATOR.$this->filename;
+      return static::UPLOAD_PATH.DIRECTORY_SEPARATOR.$this->filename;
     }
 
     public function getDownloadFileAttribute()
