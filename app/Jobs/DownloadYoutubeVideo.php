@@ -37,8 +37,8 @@ class DownloadYoutubeVideo extends Job implements ShouldQueue
       $youtube = new YoutubeDownloader($this->video->video_id);
       $youtube->setPath($this->video->download_directory);
       $info  = $youtube->getVideoInfo();
-      $url = $info['full_formats'][0]['url'];
-      $filename = $info['full_formats'][0]['filename'];
+      $url = $info->full_formats[0]->url;
+      $filename = $info->full_formats[0]->filename;
       $video->filename = $filename;
       $video->save();
       $youtube->onProgress = function ($downloadedBytes, $fileSize) {
