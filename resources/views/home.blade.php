@@ -40,7 +40,7 @@
                 @if($video->status == 'downloading')
                 <div class="progress">
                   <div class="progress-bar" role="progressbar" style="width: {{ $video->percent }}%;">
-                    <span>60% Complete</span>
+                    {{ $video->percent }}% Complete
                   </div>
                 </div>
                 @else
@@ -49,7 +49,9 @@
               </td>
               <td>
                 <div class="btn-group btn-group-xs" role="group">
-                  <a type="button" class="btn btn-success">Download</a>
+                  @if($video->status == 'finished')
+                  <a type="button" class="btn btn-success" href="{{ $video->download_link }}">Download</a>
+                  @endif
                   @if($video->status != 'downloading')
                   <a type="button" class="btn btn-danger" href="{{ route('delete', ['video' => $video->id]) }}">Delete</a>
                   @endif
