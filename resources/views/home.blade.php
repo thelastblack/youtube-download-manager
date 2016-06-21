@@ -22,13 +22,13 @@
     <div class="row">
       <div class="col-xs-12">
         <h3>Downloads <span class="badge">{{ $videos->count() }}</span></h3>
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-responsive table-bordered table-hover table-striped">
           <thead>
             <tr>
-              <th>Video Id</th>
-              <th>Name</th>
-              <th>Progress</th>
-              <th>Actions</th>
+              <th class="col-xs-2">Video Id</th>
+              <th class="col-xs-3">Name</th>
+              <th class="col-xs-5">Progress</th>
+              <th class="col-xs-2">Actions</th>
             </tr>
           </thead>
           <tbody>

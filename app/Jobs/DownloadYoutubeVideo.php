@@ -46,7 +46,6 @@ class DownloadYoutubeVideo extends Job implements ShouldQueue
           $this->video->size = $fileSize;
           $this->video->progress = $downloadedBytes;
           $this->video->save();
-          print("Downloaded {$downloadedBytes} of {$fileSize}".PHP_EOL);
       };
       $youtube->downloadFull($url, $filename);
       $this->video->status = 'finished';
