@@ -11,7 +11,7 @@ class YoutubeController extends Controller
 {
     public function index()
     {
-      return view('home')->with('videos', Video::all());
+      return view('home')->with('videos', Video::orderBy('created_at', 'desc')->get());
     }
 
     public function download(Request $request)
