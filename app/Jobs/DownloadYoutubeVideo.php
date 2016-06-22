@@ -58,8 +58,12 @@ class DownloadYoutubeVideo extends Job implements ShouldQueue
         $this->video->save();
       } catch (\Exception $e) {
         \Log::error($e->getMessage(), ['error' => $e]);
-        $this->video->status = 'failed';
-        $this->video->save();
+        try {
+          $this->video->status = 'failed';
+          $this->video->save();
+        } catch (\Exception $e2) {
+          
+        }
       }
     }
 }
