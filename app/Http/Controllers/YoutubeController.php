@@ -38,7 +38,9 @@ class YoutubeController extends Controller
 
     public function delete(Video $video)
     {
-      unlink($video->download_file);
+      if ($video->status == 'finished') {
+        unlink($video->download_file);
+      }
       $video->delete();
       return redirect()->back();
     }
