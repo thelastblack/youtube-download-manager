@@ -7,7 +7,10 @@ The simple UI is built with Bootstrap and Google fonts.
 
 ## Installation
 Getting this up and running is pretty easy as it is an standard Laravel application.
-
+ * Install required packages with Composer (get it if you don't have it)
+   ```
+   composer install
+   ```
  * Create folder for uploads
    ```
    mkdir public/uploads
