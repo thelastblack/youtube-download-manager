@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use Exception;
 use App\Jobs\Job;
 use App\Video;
 use Illuminate\Queue\SerializesModels;
@@ -34,21 +35,31 @@ class DownloadYoutubeVideo extends Job implements ShouldQueue
      */
     public function handle()
     {
-      $youtube = new YoutubeDownloader($this->video->video_id);
-      $youtube->setPath($this->video->download_directory);
-      $info  = $youtube->getVideoInfo();
-      $url = $info->full_formats[0]->url;
-      $filename = $info->full_formats[0]->filename;
-      $this->video->filename = $filename;
-      $this->video->status = 'downloading';
-      $this->video->save();
-      $youtube->onProgress = function ($downloadedBytes, $fileSize) {
-          $this->video->size = $fileSize;
-          $this->video->progress = $downloadedBytes;
-          $this->video->save();
-      };
-      $youtube->downloadFull($url, $filename);
-      $this->video->status = 'finished';
-      $this->video->save();
+      try {
+        $youtube = new YoutubeDownloader($this->video->video_id);
+        $youtube->setPath($this->video->download_directory);
+        $info  = $youtube->getVideoInfo();
+        $url = $info->full_formats[0]->url;
+        $filename = $info->full_formats[0]->filename;
+        $this->video->filename = $filename;
+        $this->video->status = 'downloading';
+        $this->video->save();
+        $start = time();
+        $youtube->onProgress = function ($downloadedBytes, $fileSize) use(&$start) {
+          if (time() - $start > 10) {
+            $this->video->size = $fileSize;
+            $this->video->progress = $downloadedBytes;
+            $this->video->save();
+            $start = time();
+          }
+        };
+        $youtube->downloadFull($url, $filename);
+        $this->video->status = 'finished';
+        $this->video->save();
+      } catch (\Exception $e) {
+        \Log::error($e->getMessage(), ['error' => $e]);
+        $this->video->status = 'failed';
+        $this->video->save();
+      }
     }
 }
