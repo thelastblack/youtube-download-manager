@@ -1,27 +1,39 @@
-# Laravel PHP Framework
+# Youtube Download Manager
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## What is it
+This is a web application to easily download Youtube videos. It is written with Laravel, so any backend supported by Laravel may be used for queuing or database. For more information about these, visit Laravel docs, which is pretty straight-forward.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+The simple UI is built with Bootstrap and Google fonts.
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Installation
+Getting this up and running is pretty easy as it is an standard Laravel application.
 
-## Official Documentation
+ * Create folder for uploads
+   ```
+   mkdir public/uploads
+   chmod 755 public/uploads
+   ```
+ * Create database file (If using SQLite, or configure your own database)
+   ```
+   touch database/database.sqlite
+   ```
+ * Run migrations
+   ```
+   php artisan migrate
+   ```
+ * Point webserver to `public` directory
+ * Visit `http://example.com/where-ever`
+ * Configure Laravel queue workers, mentioned in Laravel docs. You can use as many workers as you want.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## What does it do
+It gets a Youtube url from user, makes a download job out of it, then downloads
+it to `public/uploads` folder. The download part relies of web server to serve this folder properly, so make sure of it.
 
-## Contributing
+It was developed to be used in private environments, and as it is possible to deploy a public app with it, I did not even think about possible problems. So you are on your own.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+It uses all facilities provided by Laravel to make sure it works with different backends and with different throughput.
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+The download part is done using `masih/youtubedownloader`, so a thanks goes to this great package.
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+I have not though a lot about it, but think of it as free software. Use it for whatever you want, just give me some credits when you use this.
