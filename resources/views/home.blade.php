@@ -8,11 +8,11 @@
         <div class="jumbotron">
           <h1>Download and manage links</h1>
 
-          <form class="form-inline" action="{{ route('download') }}" method="post">
+          <form action="{{ route('versions') }}" method="post">
             {{ csrf_field() }}
             <div class="form-group">
-              <label for="exampleInputEmail1">Video URL</label>
-              <input type="text" class="form-control" name="video-url" placeholder="URL">
+              <label for="video-url">Video URL</label>
+              <input type="text" id="video-url" class="form-control" name="video-url" placeholder="URL">
             </div>
             <button type="submit" class="btn btn-default">Download</button>
           </form>

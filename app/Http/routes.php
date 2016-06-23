@@ -12,16 +12,21 @@
 */
 
 Route::get('/', [
-  'as' => 'list',
-  'uses' => 'YoutubeController@index'
+    'as' => 'list',
+    'uses' => 'YoutubeController@index'
+]);
+
+Route::post('/versions', [
+    'as' => 'versions',
+    'uses' => 'YoutubeController@versions'
 ]);
 
 Route::post('/video', [
-  'as' => 'download',
-  'uses' => 'YoutubeController@download'
+    'as' => 'download',
+    'uses' => 'YoutubeController@download'
 ]);
 
 Route::get('/video/{video}/delete', [
-  'as' => 'delete',
-  'uses' => 'YoutubeController@delete'
+    'as' => 'delete',
+    'uses' => 'YoutubeController@delete'
 ]);

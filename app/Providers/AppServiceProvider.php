@@ -13,7 +13,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Queue::failing(function ($event) {
+            $video = $event->job->videoVersion->video;
+            echo 'Failed '.$video->id.PHP_EOL;
+            $video->status = 'failed';
+            $video->save();
+        });
     }
 
     /**

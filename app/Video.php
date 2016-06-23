@@ -10,7 +10,11 @@ class Video extends Model
 
     public function getPercentAttribute()
     {
-      return (int) ($this->progress / $this->size * 100);
+        if ($this->size > 0) {
+            return (int) ($this->progress / $this->size * 100);
+        } else {
+            return 0;
+        }
     }
 
     public function getDownloadLinkAttribute()
@@ -40,5 +44,10 @@ class Video extends Model
         default:
           return null;
       }
+    }
+
+    public function version()
+    {
+        return $this->hasOne(VideoVersion::class);
     }
 }
