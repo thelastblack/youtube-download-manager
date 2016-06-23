@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Video;
 use App\Jobs\DownloadYoutubeVideo;
+use Masih\YoutubeDownloader\YoutubeDownloader;
 
 class YoutubeController extends Controller
 {
