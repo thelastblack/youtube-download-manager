@@ -17,6 +17,14 @@ class YoutubeController extends Controller
     public function download(Request $request)
     {
       $video_id = $this->parse_url($request->input('video-url'));
+      $youtube = new YoutubeDownloader($video_id);
+      $info = $youtube->getVideoInfo();
+      return view('downloadoptions')->with('info', $info);
+    }
+
+    public function createDownloadJob(Request $request)
+    {
+      $video_id = $this->parse_url($request->input('video-url'));
       $video = new Video();
       $video->video_id = $video_id;
       $video->status = 'waiting';
