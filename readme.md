@@ -8,22 +8,30 @@ The simple UI is built with Bootstrap and Google fonts.
 ## Installation
 Getting this up and running is pretty easy as it is an standard Laravel application.
  * Install required packages with Composer (get it if you don't have it)
+   
    ```
    composer install
    ```
+   
  * Create folder for uploads
+   
    ```
    mkdir public/uploads
    chmod 755 public/uploads
    ```
+   
  * Create database file (If using SQLite, or configure your own database)
+   
    ```
    touch database/database.sqlite
    ```
+   
  * Run migrations
+   
    ```
    php artisan migrate
    ```
+   
  * Point webserver to `public` directory
  * Visit `http://example.com/where-ever`
  * Configure Laravel queue workers, mentioned in Laravel docs. You can use as many workers as you want.
